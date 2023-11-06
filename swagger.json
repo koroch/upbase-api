@@ -1,0 +1,247 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Backend challenge - UPBASE",
+    "description": "Api Documentation UPBASE-API",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/user": {
+      "post": {
+        "description": "Route that creates users",
+        "sumary": "Create users",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "name",
+                  "username",
+                  "email",
+                  "password",
+                  "is_teacher"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "João da Silva"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "user01"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "example@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "sua-senha"
+                  },
+                  "is_teacher": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User created successfully"
+          },
+          "406": {
+            "description": "Email adress already used or Username already used"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/teachers": {
+      "get": {
+        "description": "Route that lists teachers",
+        "sumary": "List of teachers",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/students": {
+      "get": {
+        "description": "Route that lists students",
+        "sumary": "List of students",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/{email}": {
+      "delete": {
+        "description": "Route that excludes users by teacher users",
+        "sumary": "Delete users",
+        "tags": ["Users"],
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "JWT token is missing"
+          },
+          "403": {
+            "description": "User isn't teacher"
+          },
+          "404": {
+            "description": "The user of this email doesn't exist"
+          },
+          "500": {
+            "description": "Internal Server error"
+          }
+        }
+      }
+    },
+    "/user-update": {
+      "put": {
+        "description": "Route that updates user data",
+        "sumary": "Update users",
+        "tags": ["Users"],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "name",
+                  "username",
+                  "email",
+                  "password",
+                  "is_teacher"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "João da Silva"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "user01"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "example@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "sua-nova-senha"
+                  },
+                  "is_teacher": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "old_password": {
+                    "type": "string",
+                    "example": "sua-senha"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request or JWT token is missing"
+          },
+          "403": {
+            "description": "User isn't teacher"
+          },
+          "404": {
+            "description": "The user of this email doesn't exist"
+          },
+          "500": {
+            "description": "Internal Server error"
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "description": "Route that creates sessions for user authentication",
+        "sumary": "User authentication",
+        "tags": ["Authentication"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "example@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "sua-senha"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request or Incorrect email/password combination"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}

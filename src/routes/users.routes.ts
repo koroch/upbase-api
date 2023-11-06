@@ -10,7 +10,7 @@ usersRouter.post('/user', usersController.create);
 usersRouter.get('/teachers', usersController.listTeachers);
 usersRouter.get('/students', usersController.listStudents);
 usersRouter.delete('/user/:email', ensureAuthenticated, usersController.delete);
-usersRouter.put('/user', ensureAuthenticated, usersController.update);
+usersRouter.put('/user-update', ensureAuthenticated, usersController.update);
 
 
 export default usersRouter;
