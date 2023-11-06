@@ -1,6 +1,6 @@
 export default {
-    jwt: {
-        secret: 'SeC#r!t7-P@s5',
-        expiresIn: '7d'
-    }
-}
+  jwt: {
+    secret: process.env.APP_SECRET || "default",
+    expiresIn: "7d",
+  },
+};
