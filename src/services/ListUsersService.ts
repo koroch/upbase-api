@@ -23,12 +23,12 @@ class ListUsersService {
       return user; 
     });
 
-    const familiaLars = usersFormat.filter(function (item) {
+    const usersFilter = usersFormat.filter(function (item) {
         const result = item.is_teacher === is_teacher //se não for encontrado retorna -1
         return result;
     })
 
-    return familiaLars;
+    return usersFilter;
   }
 }
 export default ListUsersService;

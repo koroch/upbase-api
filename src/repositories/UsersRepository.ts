@@ -1,4 +1,4 @@
-import { getRepository, Repository, Not } from 'typeorm';
+import { getRepository, Repository, Not, DeleteResult } from 'typeorm';
 import IUserRepository from '../repositories/IUsersRepository';
 
 import User from '../models/User';
@@ -16,9 +16,17 @@ class UsersRepository implements IUserRepository {
     const user = await this.ormRepository.findOne(id);
     return user;
   }
+  
   public async findByEmail(email: string): Promise<User | undefined>{
     const user = await this.ormRepository.findOne({
       where: { email }
+    });
+    return user;
+  }
+
+  public async findByUsername(username: string): Promise<User | undefined>{
+    const user = await this.ormRepository.findOne({
+      where: { username }
     });
     return user;
   }
@@ -45,6 +53,11 @@ class UsersRepository implements IUserRepository {
 
   public async save(user: User): Promise<User>{
     return this.ormRepository.save(user);
+  }
+  
+  public async delete(user: User): Promise<DeleteResult>{
+    const isDeleted = await this.ormRepository.delete(user.id);
+    return isDeleted;
   }
 }
 
