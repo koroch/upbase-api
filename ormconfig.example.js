@@ -1,18 +1,18 @@
-{
+module.exports = {
   "name": "default",
   "type": "mysql",
   "host": "",
   "port": 21197,
-  "username": "root",
+  "username": "",
   "password": "",
   "database": "",
   "entities": [
-    "./src/models/*{.ts,.js}"
+    "./**/models/*{.ts,.js}"
   ],
   "migrations": [
-    "./src/database/migrations/*{.ts,.js}"
+    "./**/database/migrations/*{.ts,.js}"
   ],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./**/database/migrations"
   }
-}
+};

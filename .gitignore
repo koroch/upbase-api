@@ -2,4 +2,5 @@
 .vscode/
 .env
 /dist
-ormconfig.json
+/ormconfig.json
+/ormconfig.js
