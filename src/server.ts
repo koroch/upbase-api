@@ -1,8 +1,8 @@
-import "reflect-metadata";
 import "dotenv/config";
+import "reflect-metadata";
 
-import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
+import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 
 import swaggerUI from 'swagger-ui-express';
@@ -11,12 +11,18 @@ import swaggerJson from '../swagger.json';
 import AppError from "./errors/AppError";
 import routes from "./routes";
 
-import "./database";
 import "./container";
+import "./database";
 
 const app = express();
 
-app.use(cors());
+const corsConfig = {
+  origin: '',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}
+app.use(cors(corsConfig))
+app.options("", cors(corsConfig))
 app.use(express.json());
 app.use(routes);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJson));
