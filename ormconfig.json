@@ -7,12 +7,12 @@
   "password": "bAf-BC1CHB4-552bEHfHh2hdga-g4c2f",
   "database": "railway",
   "entities": [
-    "./**/models/*{.ts,.js}"
+    "./dist/models/*{.ts,.js}"
   ],
   "migrations": [
-    "./**/database/migrations/*{.ts,.js}"
+    "./dist/database/migrations/*{.ts,.js}"
   ],
   "cli": {
-    "migrationsDir": "./**/database/migrations"
+    "migrationsDir": "./dist/database/migrations"
   }
 }
